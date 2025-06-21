@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: blog
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+      database: blogsDB
+      auto-index-creation: true
