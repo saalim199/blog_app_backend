@@ -3,6 +3,6 @@ spring:
     name: blog
   data:
     mongodb:
-      uri: <YOUR MONGO DB URI>
+      uri: ${MONGODB_URI}
       database: blogsDB
       auto-index-creation: true
