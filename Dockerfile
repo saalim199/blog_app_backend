@@ -1,14 +1,12 @@
-# Use an official OpenJDK runtime as a parent image
-FROM eclipse-temurin:17-jre
-
-# Set the working directory
+# First stage: build the jar
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy the jar file (replace with your jar name)
-COPY target/*.jar app.jar
-
-# Expose port 8080
+# Second stage: run the jar
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Run the jar file
 ENTRYPOINT ["java", "-jar", "app.jar"]
