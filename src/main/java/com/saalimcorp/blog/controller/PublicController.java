@@ -1,5 +1,6 @@
 package com.saalimcorp.blog.controller;
 
+import com.saalimcorp.blog.dto.ResponseDTO;
 import com.saalimcorp.blog.entity.Category;
 import com.saalimcorp.blog.service.CategoryService;
 import lombok.AllArgsConstructor;
@@ -23,10 +24,15 @@ public class PublicController {
 
     @GetMapping("/all-categories")
     public ResponseEntity<?> getAllCategories() {
-        List<Category> categories = categoryService.getAllCategory();
-        if (categories != null) {
-            return new ResponseEntity<>(categories, HttpStatus.OK);
+        ResponseDTO responseDTO = new ResponseDTO();
+        try {
+            List<Category> categories = categoryService.getAllCategory();
+                responseDTO.setMessage("Success");
+                responseDTO.setData(categories);
+                return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        }catch (Exception e) {
+            responseDTO.setMessage(e.getMessage());
+            return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("No categories found", HttpStatus.NOT_FOUND);
     }
 }

@@ -35,11 +35,9 @@ public class CategoryService {
 
     public List<Category> getAllCategory() {
         try {
-            var categories = categoryRepository.findAll();
-            return categories;
+            return categoryRepository.findAll();
         } catch (Exception e) {
-            log.error("Error fetching categories: {}", e.getMessage());
-            return null;
+            throw new RuntimeException("Error getting all categories");
         }
     }
 
