@@ -32,7 +32,7 @@ Supports user registration, login, blog CRUD, categories, comments, likes, and a
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/blog_backend.git
+git clone https://github.com/saalim199/blog_app_backend
 cd blog_backend
 ```
 
